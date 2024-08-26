@@ -18,7 +18,96 @@
 # 10일 동안 공부한 내용
 
 - 큐
+
+  - 개념
+    - 먼저 들어간 데이터가 먼저 나온는 자료구조
+    - FIFO, First In First Out
+  - 큐의 특성을 활용하는 분야?
+    - 작업 대기열: 네트워크 통신을 할 때 다수의 클라이언트에서 서버에 작업을 요청하면 서버는 요청이 들어온 순서대로 작업을 처리합니다.
+    - 이벤트 처리: 어떤 애플리케이션이나 시스템에서 사용자의 이벤트, 예를 들어 키보드 입력이나 마우스 움직임을 처리할 때 큐를 활용할 수 있습니다.
+  - 큐의 ADT(Abstract Data Type)
+    - isFull(): 큐에 들어 있는 데이터 개수가 maxmize인지 확인해 boolean 값을 반환
+    - isEmpty(): 큐에 들어 있는 데이터가 하나도 없는지 확인해 boolean 값을 반환
+    - push(): 큐에 데이터를 푸시
+    - pop(): 큐에서 처음에 푸시한 데이터를 팝하고, 그 데이터를 반환
+    - front: 큐에서 가장 처음에 팝한 위치를 기록
+    - rear: 큐에서 최근에 푸시한 데이터의 위치를 기록
+    - data[maxsize]: 큐의 데이터를 관리하는 배열
+  - 큐 구현하기
+
+    - 배열 이용
+    - 연결 리스트 이용하는 방식
+
+      ```javascript
+      class Node {
+        constructor(data) {
+          this.data = data;
+          this.next = null;
+        }
+      }
+      class Queue {
+        constructor() {
+          this.head = null;
+          this.tail = null;
+          this.size = 0;
+        }
+
+        push(data) {
+          const newNode = new Node(data);
+
+          if (!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+          } else {
+            this.tail.next = newNode;
+            this.tail = newNode;
+          }
+          this.size++;
+        }
+
+        pop() {
+          if (!this.head) {
+            return null;
+          }
+
+          const removeNode = this.head;
+          this.head = this.head.next;
+
+          if (!this.head) {
+            this.tail = null;
+          }
+
+          this.size--;
+
+          return removeNode.data;
+        }
+
+        isEmpty() {
+          return this.size === 0;
+        }
+      }
+      ```
+
 - 해시
+  - 개념
+    - 해시 함수를 사용해서 변환한 값을 인덱스로 삼아 키와 값을 저장해서 빠른 데이터 탐색을 제공하는 자료구조
+    - 해시는 키를 활용해 데이터 탐색을 빠르게 한다
+  - 특징
+    - 단방향으로 동작, 키를 통해 값을 찾을 수 있지만 값을 통해 키를 찾을 수는 없다
+    - 찾고자 하는 값을 O(1)에서 바로 찾을 수 있다. `키 자체가 해시 함수에 의해 값이 있는 인덱스가 되므로 값을 찾기 윟나 탐색 과정이 필요 없다.`
+    - 값을 인덱스로 활용하려면 적절한 변환 과정을 거쳐야 한다.
+  - 해시의 특성을 활용하는 분야
+    - 코딩 테스트에서는 `특정 데이터를 탐색하는 횟수가 많을 경우` 해시를 고려하면 좋다
+    - 비밀번호 관리
+    - 데이터베이스 인덱싱
+    - 블록체인
+  - 충돌
+    - 정의: 서로 다른 키에 대해서 해시 함수의 결괏값이 같은 경우
+    - 충돌 처리
+      - 체이닝
+        - 충돌이 발생하면 해당 버킷에 연결 리스트로 같은 해시값을 가지는 데이터를 연결
+      - 개방 주소법
+        - 체이닝에서 연결 리스트로 충돌값을 연결한 것과 다르게 빈 버킷을 찾아 충돌값을 삽입
 
 # 앞으로 10일 동안 나의 목표는?!
 
