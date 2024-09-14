@@ -24,7 +24,8 @@
       버튼 핸들을 생성할 때 기본 스타일인 BS_DEFPUSHBUTTON이 아닌 BS_OWNERDRAW로 생성하면 위 메시지에서 직접 그리는 것이 가능해서 시도해보았는데 성공했다.
   - 버튼 스타일 변경 
     - 주로 비트 XOR 할당 연산자 사용
-      예 :  // 현재 버튼의 스타일을 가져옴
+      예 :  
+            // 현재 버튼의 스타일을 가져옴
             LONG_PTR style = GetWindowLongPtr(hButton, GWL_STYLE);
 
             // 스타일을 변경 (예: 토글 버튼 스타일 추가/삭제)
